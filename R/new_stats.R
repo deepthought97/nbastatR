@@ -238,14 +238,14 @@ get_nba_current_season_schedule <-
   json_data <- json$league$standard
 
   df_season_games <-
-    json_data[!json_data %>% names() %in% c("period", "nugget", "hTeam", "vTeam", "watch", "playoffs")] %>%
+    json_data[!json_data %>% names() %in% c("period", "nugget", "hTeam", "vTeam", "watch", "playoffs", "timeEasternGame")] %>%
     dplyr::as_data_frame()
 
   df_season_games <-
     df_season_games %>%
     purrr::set_names(c("slugGame", "idStageGame", "slugGameCode", "idGameStatus",
                        "hasExtendedStatus", "isUnknownStartTime", "datetimeGame", "dateSlugGame",
-                       "timeEasternGame", "hasBuzzerBeater", "tags")) %>%
+                       "hasBuzzerBeater", "tags")) %>%
     select(-one_of("tags")) %>%
     tidyr::separate(slugGameCode,
                     into = c("idGame", "slugTeams"),
@@ -313,7 +313,7 @@ get_nba_current_season_schedule <-
     purrr::reduce(left_join) %>%
     suppressMessages() %>%
     select(-idRow) %>%
-    dplyr::select(idSeasonType, dateGame, timeEasternGame, idGame, everything())
+    dplyr::select(idSeasonType, dateGame, idGame, everything())
 
   data
 }
