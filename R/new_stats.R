@@ -238,7 +238,7 @@ get_nba_current_season_schedule <-
   json_data <- json$league$standard
 
   df_season_games <-
-    json_data[!json_data %>% names() %in% c("period", "nugget", "hTeam", "vTeam", "watch", "playoffs", "timeEasternGame")] %>%
+    json_data[!json_data %>% names() %in% c("period", "nugget", "hTeam", "vTeam", "watch", "playoffs", "startTimeEastern")] %>%
     dplyr::as_data_frame()
 
   df_season_games <-
