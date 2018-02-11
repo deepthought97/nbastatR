@@ -231,9 +231,9 @@ get.nba_headers <-
 #' @examples
 #' get_nba_current_season_schedule()
 get_nba_current_season_schedule <-
-  function() {
+  function(season = 2017) {
   json <-
-    "https://data.nba.net/prod/v2/2017/schedule.json" %>%
+    sprintf("https://data.nba.net/prod/v2/%s/schedule.json", season) %>%
   curl_json_to_vector()
   json_data <- json$league$standard
 
